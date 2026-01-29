@@ -1,5 +1,8 @@
 package app;
 
+import javax.xml.crypto.Data;
+import java.nio.file.Path;
+
 public class DataStorageApp {
     static void main() {
 
@@ -13,6 +16,13 @@ public class DataStorageApp {
 
         String p1Id = personDataStorage.store(new Person("Benny", 23));
         printStorageObject(p1Id, personDataStorage);
+
+        DataStorage<Person> filePersonDataStorage = new FileStorage<>(Path.of(""), Person.class);
+        String fileId1 = filePersonDataStorage.store(new Person("Bente", 22));
+        String fileId2 = filePersonDataStorage.store(new Person("Peter", 43));
+
+        printStorageObject(fileId2, filePersonDataStorage);
+
     }
 
     private static void printStorageObject(String id, DataStorage storage){
